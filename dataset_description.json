@@ -8,16 +8,16 @@
         "Jeremy I Skipper"
     ],
     "BIDSVersion": "1.0.1",
-    "DatasetDOI": "TODO: eventually a DOI for the dataset",
+    "DatasetDOI": "10.18112/openneuro.ds002837.v1.0.1",
     "Funding": [
         "LIDo BBSRC",
         "EPSRC EP/M026965/1"
     ],
     "HowToAcknowledge": "TODO: describe how to acknowledge -- either cite a corresponding paper, or just in acknowledgement section",
-    "License": "TODO: choose a license, e.g. PDDL (http://opendatacommons.org/licenses/pddl/)",
+    "License": "CC0",
     "Name": "Naturalistic Neuroimaging Database",
     "ReferencesAndLinks": [
         "http://naturalistic-neuroimaging-database.org/",
-        "A ‘Naturalistic Neuroimaging Database’ for understanding the brain using ecological stimuli"
+        "A \u2018Naturalistic Neuroimaging Database\u2019 for understanding the brain using ecological stimuli"
     ]
 }
