@@ -1,0 +1,23 @@
+{
+    "Acknowledgements": "Dr Fred Dick, Dr Tessa Dekker, the LAB lab and BUCNI",
+    "Authors": [
+        "Sarah Aliko",
+        "Jiawen Huang",
+        "Florin Gheorghiu",
+        "Stefanie Meliss",
+        "Jeremy I Skipper"
+    ],
+    "BIDSVersion": "1.0.1",
+    "DatasetDOI": "TODO: eventually a DOI for the dataset",
+    "Funding": [
+        "LIDo BBSRC funding",
+        "EPSRC funding"
+    ],
+    "HowToAcknowledge": "TODO: describe how to acknowledge -- either cite a corresponding paper, or just in acknowledgement section",
+    "License": "TODO: choose a license, e.g. PDDL (http://opendatacommons.org/licenses/pddl/)",
+    "Name": "Naturalistic Neuroimaging Database",
+    "ReferencesAndLinks": [
+        "http://naturalistic-neuroimaging-database.org/",
+        "A ‘Naturalistic Neuroimaging Database’ for understanding the brain using ecological stimuli"
+    ]
+}
