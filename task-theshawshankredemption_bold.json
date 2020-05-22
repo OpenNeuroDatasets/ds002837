@@ -54,7 +54,7 @@
   "SoftwareVersions": "syngo_MR_B17",
   "SpacingBetweenSlices": 3.2,
   "StationName": "MRC26099",
-  "TaskName": "The Shawshank Redemption",
+  "TaskName": "theshawshankredemption",
   "TotalReadoutTime": 0.0504006,
   "dcmmeta_reorient_transform": [
     [0.0, -1.0, 0.0, 63.0],
