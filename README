@@ -1,4 +1,4 @@
-The Naturalistic Neuroimaging Database (NNDb) contains datasets for 86 human participants watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).
+The Naturalistic Neuroimaging Database (NNDb v1.0) contains datasets for 86 human participants watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).
 The participants were all right-handed, native English speakers, with no history of neurological/psychiatric illnesses, with no hearing impairments, unimpaired or correcte vision, and taking no medications at the time of scan.
 Each movie was stopped in ~1-hour intervals or when participants asked for a break, resulting in 2-6 runs of BOLD-fMRI.
 A 10min high-resolution defaced T1-weighted anatomical MRI scan (MPRAGE) is also provided.
