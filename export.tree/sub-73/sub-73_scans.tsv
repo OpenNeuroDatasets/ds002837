@@ -1,0 +1,5 @@
+filename	acq_time	operator	randstr
+func/sub-73_task-split_run-01_bold.nii.gz	2019-07-02T12:51:50	Sarah	d66cadfc
+func/sub-73_task-split_run-02_bold.nii.gz	2019-07-02T13:41:43	Sarah	603764af
+func/sub-73_task-split_run-03_bold.nii.gz	2019-07-02T14:11:30	Sarah	3668d8fb
+anat/sub-73_T1w.nii.gz	2019-07-02T14:59:55	Sarah	abba7415
