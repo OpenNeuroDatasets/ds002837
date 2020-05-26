@@ -18,6 +18,7 @@
     "Name": "Naturalistic Neuroimaging Database",
     "ReferencesAndLinks": [
         "http://naturalistic-neuroimaging-database.org/",
-        "https://www.biorxiv.org/content/10.1101/2020.05.22.110817v1"
+        "https://www.biorxiv.org/content/10.1101/2020.05.22.110817v1",
+        "https://github.com/lab-lab/nndb"
     ]
 }
