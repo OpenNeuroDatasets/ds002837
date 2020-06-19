@@ -1,0 +1,6 @@
+filename	acq_time	operator	randstr
+func/sub-48_task-pulpfiction_run-01_bold.nii.gz	2020-01-27T17:31:09	Florin	927a4ade
+func/sub-48_task-pulpfiction_run-02_bold.nii.gz	2020-01-27T18:33:02	Florin	981c6ff8
+func/sub-48_task-pulpfiction_run-03_bold.nii.gz	2020-01-27T19:07:09	Florin	5c2a1749
+func/sub-48_task-pulpfiction_run-04_bold.nii.gz	2020-01-27T19:44:02	Florin	f394cd4f
+anat/sub-48_T1w.nii.gz	2020-01-27T20:35:43	Florin	52148f8f
