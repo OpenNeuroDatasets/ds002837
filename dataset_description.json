@@ -1,5 +1,5 @@
 {
-    "Acknowledgements": "Drs Fred Dick, Joe Devlin and Tessa Dekker (the three Ds) and the rest of the Birkbeck-UCL Centre for Neuroimaging (BUCNI) staff and various LAB Lab stallions. ",
+    "Acknowledgements": "Dr Fred Dick, Dr Tessa Dekker, the LAB lab and BUCNI",
     "Authors": [
         "Sarah Aliko",
         "Jiawen Huang",
@@ -8,17 +8,16 @@
         "Jeremy I Skipper"
     ],
     "BIDSVersion": "1.0.1",
-    "DatasetDOI": "10.18112/openneuro.ds002837.v1.0.6",
+    "DatasetDOI": "TODO: eventually a DOI for the dataset",
     "Funding": [
         "LIDo BBSRC",
         "EPSRC EP/M026965/1"
     ],
     "HowToAcknowledge": "TODO: describe how to acknowledge -- either cite a corresponding paper, or just in acknowledgement section",
-    "License": "CC0",
+    "License": "TODO: choose a license, e.g. PDDL (http://opendatacommons.org/licenses/pddl/)",
     "Name": "Naturalistic Neuroimaging Database",
     "ReferencesAndLinks": [
         "http://naturalistic-neuroimaging-database.org/",
-        "https://www.biorxiv.org/content/10.1101/2020.05.22.110817v1",
-        "https://github.com/lab-lab/nndb"
+        "A ‘Naturalistic Neuroimaging Database’ for understanding the brain using ecological stimuli"
     ]
 }
