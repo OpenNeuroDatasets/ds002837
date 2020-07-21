@@ -1,14 +1,49 @@
-The Naturalistic Neuroimaging Database (NNDb v1.0) contains datasets for 86 human participants watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).
-The participants were all right-handed, native English speakers, with no history of neurological/psychiatric illnesses, with no hearing impairments, unimpaired or correcte vision, and taking no medications at the time of scan.
-Each movie was stopped in ~1-hour intervals or when participants asked for a break, resulting in 2-6 runs of BOLD-fMRI.
-A 10min high-resolution defaced T1-weighted anatomical MRI scan (MPRAGE) is also provided.
+The Naturalistic Neuroimaging Database (NNDb v1.0) contains datasets from 86 human participants doing the NIH Toolbox and then watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).
+The participants were all right-handed, native English speakers, with no history of neurological/psychiatric illnesses, with no hearing impairments, unimpaired or corrected vision and taking no medication.
+Each movie was stopped in 40-50 minute intervals or when participants asked for a break, resulting in 2-6 runs of BOLD-fMRI.
+A 10 minute high-resolution defaced T1-weighted anatomical MRI scan (MPRAGE) is also provided.
+
+The NIH Toolbox data is:
+nih_demographics.csv
+nih_data.csv
+nih_scores.csv
+
+The stimuli can be found using the following EAN numbers:
+500 Days of Summer       5039036043359
+Citizenfour	         5050968002313
+12 Years a Slave         5030305517229
+Back to the Future       5050582401288
+Little Miss Sunshine     5039036029667
+The Prestige             7321902106472
+Pulp Fiction             5060223762043
+The Shawshank Redemption 5037115299635
+Split                    5902115603099
+The Usual Suspects       5039036033497
+
+Or they can be purchased directory on Amazon using the following ASIN codes:
+500 Days of Summer       B002KKBMSW
+Citizenfour	         B00YP65NEI
+12 Years a Slave         B00HR23CCM
+Back to the Future       B000BVK82I
+Little Miss Sunshine     B000JU9OJ4
+The Prestige             B000K7LQS8
+Pulp Fiction             B004UGAMY4
+The Shawshank Redemption B001CWLFKE
+Split                    B071J24232
+The Usual Suspects       B0010YXNGI
+
+Some inital stimulus annotations can be found in the stimuli folder
 
 Data is organized as follows:
-sub-<ID> folders contain raw data for fMRI runs and anatomical scans
-derivatives folder contains the fully preprocessed fMRI data, anatomical mask with white matter and ventricles eroded, anatomical aligned to N27 MNI template
-
+The sub-<ID> folders contain raw data for fMRI runs and anatomical scans. 
+The derivatives sub-<ID> folders contain the:
+- Fully preprocessed fMRI data
+- Motion and ICA artifact files
+- Anatomical mask with white matter and ventricles removed 
+- An anatomical image aligned
+- All files are aligned to N27 MNI template
+The mriqc derivatives folder contain the MRIQC no-reference image quality metrics for the NNDb anatomical and functional data
 
 NOTES:
-1) Subjects 3-6, 10, 11, 24, 28, 29, 31, 39, 41, 72, 83-85 did not have the original IMA files to format into BIDS, so they were manually created (functionals) or copied in from other subjects (anatomicals). These will be updated once access to UCL facilities is restored after the COVID-19 lockdown.
-2) Subject 14 used a 30-channel head coil instead of 32-channel
- 
+* Subjects 3-6, 10, 11, 24, 28, 29, 31, 39, 41, 72, 83-85 did not have the original IMA files to format into BIDS, so they were manually created (functionals) or copied in from other subjects (anatomicals). These will be updated once access to UCL facilities is restored after the COVID-19 lockdown.
+* If you plan to use the raw data with the stimuli / annotations, please be aware that some temporal interpolation is necessary. See our manuscript for details and GitHub for an example script to do this. Or just email one of us. 
