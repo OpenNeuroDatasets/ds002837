@@ -1,0 +1,5 @@
+filename	acq_time	operator	randstr
+func/sub-36_task-citizenfour_run-01_bold.nii.gz	2019-09-03T17:36:25	Florin	72d0ff3c
+func/sub-36_task-citizenfour_run-02_bold.nii.gz	2019-09-03T18:29:45	Florin	a6be68f3
+func/sub-36_task-citizenfour_run-03_bold.nii.gz	2019-09-03T19:13:50	Florin	589c1546
+anat/sub-36_T1w.nii.gz	2019-09-03T19:42:45	Florin	09ced21a
