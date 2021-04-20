@@ -1,5 +1,135 @@
 ### Overview
-- The Naturalistic Neuroimaging Database (NNDb v1.0) contains datasets from 86 human participants doing the NIH Toolbox and then watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).The participants were all right-handed, native English speakers, with no history of neurological/psychiatric illnesses, with no hearing impairments, unimpaired or corrected vision and taking no medication. Each movie was stopped in 40-50 minute intervals or when participants asked for a break, resulting in 2-6 runs of BOLD-fMRI. A 10 minute high-resolution defaced T1-weighted anatomical MRI scan (MPRAGE) is also provided.
+- The Naturalistic Neuroimaging Database (NNDb v2.0) contains datasets from 86 human participants doing the NIH Toolbox and then watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).The participants were all right-handed, native English speakers, with no history of neurological/psychiatric illnesses, with no hearing impairments, unimpaired or corrected vision and taking no medication. Each movie was stopped in 40-50 minute intervals or when participants asked for a break, resulting in 2-6 runs of BOLD-fMRI. A 10 minute high-resolution defaced T1-weighted anatomical MRI scan (MPRAGE) is also provided.
+- The NNDb V2.0 is now on Neuroscout, a platform for fast and flexible re-analysis of (naturalistic) fMRI studies. See: https://neuroscout.org/
+
+### v2.0 Changes
+- Overview
+  - We have replaced our own preprocessing pipeline with that implemented in AFNI’s afni_proc.py, thus changing only the derivative files. This introduces a fix for an issue with our normalization (i.e., scaling) step and modernizes and standardizes the preprocessing applied to the NNDb derivative files. We have done a bit of testing and have found that results in both pipelines are quite similar in terms of the resulting spatial patterns of activity but with the benefit that the afni_proc.py results are 'cleaner' and statistically more robust.
+- Normalization
+  - Emily Finn and Clare Grall at Dartmouth and Rick Reynolds and Paul Taylor at AFNI, discovered and showed us that the normalization procedure we used for the derivative files was less than ideal for timeseries runs of varying lengths. Specifically, the 3dDetrend flag -normalize makes 'the sum-of-squares equal to 1'. We had not thought through that an implication of this is that the resulting normalized timeseries amplitudes will be affected by run length, increasing as run length decreases (and maybe this should go in 3dDetrend’s help text). To demonstrate this, I wrote a version of 3dDetrend’s -normalize for R so you can see for yourselves by running the following code:
+
+    ```
+    # Generate a resting state (rs) timeseries (ts)
+    # Install / load package to make fake fMRI ts
+    # install.packages("neuRosim")
+    library(neuRosim)
+    # Generate a ts
+    ts.rs <- simTSrestingstate(nscan=2000, TR=1, SNR=1)
+    # 3dDetrend -normalize
+    # R command version for 3dDetrend -normalize -polort 0 which normalizes by  making "the sum-of-squares equal to 1"
+    # Do for the full timeseries
+    ts.normalised.long <- (ts.rs-mean(ts.rs))/sqrt(sum((ts.rs-mean(ts.rs))^2));
+    # Do this again for a shorter version of the same timeseries
+    ts.shorter.length <- length(ts.normalised.long)/4
+    ts.normalised.short <- (ts.rs[1:ts.shorter.length]- mean(ts.rs[1:ts.shorter.length]))/sqrt(sum((ts.rs[1:ts.shorter.length]- mean(ts.rs[1:ts.shorter.length]))^2));
+    # By looking at the summaries, it can be seen that the median values become   larger
+    summary(ts.normalised.long)
+    summary(ts.normalised.short)
+    # Plot results for the long and short ts
+    # Truncate the longer ts for plotting only
+    ts.normalised.long.made.shorter <- ts.normalised.long[1:ts.shorter.length]
+    # Give the plot a title
+    title <- "3dDetrend -normalize for long (blue) and short (red) timeseries";
+    plot(x=0, y=0, main=title, xlab="", ylab="", xaxs='i',  xlim=c(1,length(ts.normalised.short)),  ylim=c(min(ts.normalised.short),max(ts.normalised.short)));
+    # Add zero line
+    lines(x=c(-1,ts.shorter.length), y=rep(0,2), col='grey');
+    # 3dDetrend -normalize -polort 0 for long timeseries
+    lines(ts.normalised.long.made.shorter, col='blue');
+    # 3dDetrend -normalize -polort 0 for short timeseries
+    lines(ts.normalised.short, col='red');
+    ```
+- Standardization/modernization
+  - The above individuals also encouraged us to implement the afni_proc.py script over our own pipeline. It introduces at least three additional improvements: First, we now use Bob’s @SSwarper to align our anatomical files with an MNI template (now MNI152_2009_template_SSW.nii.gz) and this, in turn, integrates nicely into the afni_proc.py pipeline. This seems to result in a generally better or more consistent alignment, though this is only a qualitative observation. Second, all the transformations / interpolations and detrending are now done in fewers steps compared to our pipeline. This is preferable because, e.g., there is less chance of inadvertently reintroducing noise back into the timeseries (see Lindquist, Geuter, Wager, & Caffo 2019). Finally, many groups are advocating using tools like fMRIPrep or afni_proc.py to increase standardization of analyses practices in our neuroimaging community. This presumably results in less error, less heterogeneity and more interpretability of results across studies. Along these lines, the quality control (‘QC’) html pages generated by afni_proc.py are a real help in assessing data quality and almost a joy to use.
+- New afni_proc.py command line
+  - The following is the afni_proc.py command line that we used to generate blurred and censored timeseries files. The afni_proc.py tool comes with extensive help and examples. As such, you can quickly understand our preprocessing decisions by scrutinising the below. Specifically, the following command is most similar to Example 11 for ‘Resting state analysis’ in the help file (see https://afni.nimh.nih.gov/pub/dist/doc/program_help/afni_proc.py.html):
+  ```
+  afni_proc.py \
+  -subj_id  "$sub_id_name_1" \
+  -blocks despike tshift align tlrc volreg mask blur scale regress \
+  -radial_correlate_blocks tcat volreg \
+  -copy_anat anatomical_warped/anatSS.1.nii.gz \
+  -anat_has_skull no \
+  -anat_follower anat_w_skull anat anatomical_warped/anatU.1.nii.gz \
+  -anat_follower_ROI aaseg anat freesurfer/SUMA/aparc.a2009s+aseg.nii.gz \
+  -anat_follower_ROI aeseg epi  freesurfer/SUMA/aparc.a2009s+aseg.nii.gz \
+  -anat_follower_ROI fsvent epi  freesurfer/SUMA/fs_ap_latvent.nii.gz \
+  -anat_follower_ROI fswm epi  freesurfer/SUMA/fs_ap_wm.nii.gz \
+  -anat_follower_ROI fsgm epi  freesurfer/SUMA/fs_ap_gm.nii.gz \
+  -anat_follower_erode fsvent fswm \
+  -dsets media_?.nii.gz \
+  -tcat_remove_first_trs 8 \
+  -tshift_opts_ts -tpattern alt+z2 \
+  -align_opts_aea -cost lpc+ZZ -giant_move -check_flip \
+  -tlrc_base "$basedset" \
+  -tlrc_NL_warp \
+  -tlrc_NL_warped_dsets \
+      anatomical_warped/anatQQ.1.nii.gz \
+      anatomical_warped/anatQQ.1.aff12.1D \
+      anatomical_warped/anatQQ.1_WARP.nii.gz \
+  -volreg_align_to MIN_OUTLIER \
+  -volreg_post_vr_allin yes \
+  -volreg_pvra_base_index MIN_OUTLIER \
+  -volreg_align_e2a \
+  -volreg_tlrc_warp \
+  -mask_opts_automask -clfrac 0.10 \
+  -mask_epi_anat yes \
+  -blur_to_fwhm -blur_size $blur \
+  -regress_motion_per_run \
+  -regress_ROI_PC fsvent 3 \
+  -regress_ROI_PC_per_run fsvent \
+  -regress_make_corr_vols aeseg fsvent \
+  -regress_anaticor_fast \
+  -regress_anaticor_label fswm \
+  -regress_censor_motion 0.3 \
+  -regress_censor_outliers 0.1 \
+  -regress_apply_mot_types demean deriv \
+  -regress_est_blur_epits \
+  -regress_est_blur_errts \
+  -regress_run_clustsim no \
+  -regress_polort 2 \
+  -regress_bandpass 0.01 1 \
+  -html_review_style pythonic
+  ```
+  We used similar command lines to generate ‘blurred and not censored’ and the ‘not blurred and not censored’ timeseries files (described more fully below). We will provide the code used to make all derivative files available on our github site (https://github.com/lab-lab/nndb).
+
+  We made one choice above that is different enough from our original pipeline that it is worth mentioning here. Specifically, we have quite long runs, with the average being ~40 minutes but this number can be variable (thus leading to the above issue with 3dDetrend’s -normalise). A discussion on the AFNI message board with one of our team (starting here, https://afni.nimh.nih.gov/afni/community/board/read.php?1,165243,165256#msg-165256), led to the suggestion that '-regress_polort 2' with '-regress_bandpass 0.01 1' be used for long runs. We had previously used only a variable polort with the suggested 1 + int(D/150) approach. Our new polort 2 + bandpass approach has the added benefit of working well with afni_proc.py.
+
+  Which timeseries file you use is up to you but I have been encouraged by Rick and Paul to include a sort of PSA about this. In Paul’s own words:
+  * Blurred data should not be used for ROI-based analyses (and potentially not for ICA? I am not certain about standard practice).
+  * Unblurred data for ISC might be pretty noisy for voxelwise analyses, since blurring should effectively boost the SNR of active regions (and even good alignment won't be perfect everywhere).
+  * For uncensored data, one should be concerned about motion effects being left in the data (e.g., spikes in the data).
+  * For censored data:
+    * Performing ISC requires the users to unionize the censoring patterns during the correlation calculation.
+    * If wanting to calculate power spectra or spectral parameters like ALFF/fALFF/RSFA etc. (which some people might do for naturalistic tasks still), then standard FT-based methods can't be used because sampling is no longer uniform. Instead, people could use something like 3dLombScargle+3dAmpToRSFC, which calculates power spectra (and RSFC params) based on a generalization of the FT that can handle non-uniform sampling, as long as the censoring pattern is mostly random and, say, only up to about 10-15% of the data.
+  In sum, think very carefully about which files you use. If you find you need a file we have not provided, we can happily generate different versions of the timeseries upon request and can generally do so in a week or less.
+- Effect on results
+  - From numerous tests on our own analyses, we have qualitatively found that results using our old vs the new afni_proc.py preprocessing pipeline do not change all that much in terms of general spatial patterns. There is, however, an improvement in how ‘clean’ the data looks and also in the resulting robustness of the statistics.
+  - To give a more quantitative example, we used AFNI’s 3dmaskave, 3dTcorr1D and 3dttest++ to do a seed-based connectivity analysis. With 3dmaskave, we generated the average of the old and new timeseries from left transverse temporal gyrus voxels to use as a seed. Despite Pauls’s recommendation above, we used the blurred and uncensored timeseries files here as we had previously only provided the blurred data. Functional connectivity was done with 3dTcorr1D, Fisher transformed and submitted to 3dttest++. We corrected for multiple comparisons using the -Clustsim flag in the latter.
+  - We calculated the spatial similarity of resulting maps using 3ddot. For all participants (N=86), the spatial correlation between the resulting unthresholded mean maps from the two preprocessing pipelines is .87. The range of z-scores for the preprocessing was the same. However, the number of voxels with a z-score of 13 or more (i.e., p < 1.22e-38) increased by a factor of about six (i.e., 2400 vs 15421 voxels), suggesting more robust statistics.
+- Files
+  - The new anatomical files are in NNDb/openneuro.org/datasets/ds002837/derivatives/sub-*/anat/ and include:
+    * sub-*_t1w_mask_anat.nii.gz
+    * sub-*_t1w_mask_epi_anat.nii.gz
+    * sub-*_t1w_mni_alignment.nii.gz
+
+  The first two files are different masks from afni_proc.py originally output as mask_anat.ap.nii.gz and mask_epi_anat.ap.nii.gz, from the above command line. The final file is the MNI aligned anatomical file (originally called anat_final.ap.nii.gz). The latter is now aligned to MNI152_2009_template_SSW.nii.gz, available in AFNI.
+  The new functional files are in NNDb/openneuro.org/datasets/ds002837/derivatives/sub-*/func/ and include the following six timeseries:
+    * sub-*_task-*_bold_blur_censor_ica.nii.gz
+    * sub-*_task-*_bold_blur_no_censor_ica.nii.gz
+    * sub-*_task-*_bold_no_blur_no_censor_ica.nii.gz
+    * sub-*_task-*_bold_blur_censor.nii.gz
+    * sub-*_task-*_bold_blur_no_censor.nii.gz
+    * sub-*_task-*_bold_no_blur_no_censor.nii.gz
+
+  These are hopefully understandable from the file names which indicate whether files were blurred or not (still at 6 mm using 3dBlurToFWHM), censored or not (not previously done in v1 of the NNDb) and with or without the ICA based artifact time courses removed (i.e., with or without 'ica').
+  The new regressor files are in NNDb/openneuro.org/datasets/ds002837/derivatives/sub-*/regressors/ and include the following:
+    * sub-*_task-*_bold_ica_artifacts.1D
+    * sub-*_task-*_censored_timepoints.1D
+    * sub-*_task-*_polort_bandpass_vent_wm_motion.1D
+
+  The censored timepoints file was originally called censor_ap_combined_2.1D by afni_proc.py. See the above command line for the parameters used to determine what is an outlying timepoint. By these, the NNDb has 0.60% median number of outliers meaning about 35-40 time points can be expected to be censored per participant.
+
+  The final file listed above was originally called X.nocensor.xmat.1D by the afni_proc.py script and is used to generate the final detrended timeseries. One difference between these detrending regressors from our original analysis is that it also uses the derivatives of the motion regressors.
 
 ### The NIH Toolbox data files are
 - nih_demographics.csv
@@ -19,11 +149,11 @@
 - The Usual Suspects: EAN = 5039036033497; ASIN = B0010YXNGI
 
 ### Data is organized as follows
-- The sub-<ID> folders contain raw data for fMRI runs and anatomical scans. 
+- The sub-<ID> folders contain raw data for fMRI runs and anatomical scans.
 - The derivatives sub-<ID> folders contain the
   - Fully preprocessed fMRI data
   - Motion and ICA artifact files
-  - Anatomical mask with white matter and ventricles removed 
+  - Anatomical mask with white matter and ventricles removed
   - An anatomical image aligned
   - All files are aligned to N27 MNI template
 - Some inital stimulus annotations can be found in the stimuli folder.
@@ -31,6 +161,7 @@
 
 ### Notes
 - Subjects 3-6, 10, 11, 24, 28, 29, 31, 39, 41, 72, 83-85 did not have the original IMA files to format into BIDS, so they were manually created (functionals) or copied in from other subjects (anatomicals). These will be updated once access to UCL facilities is restored after the COVID-19 lockdown.
-- If you plan to use the raw data with the stimuli / annotations, please be aware that some temporal interpolation is necessary. See our manuscript for details and GitHub for an example script to do this. Or just email one of us. 
+- If you plan to use the raw data with the stimuli / annotations, please be aware that some temporal interpolation is necessary. See our manuscript for details and GitHub for an example script to do this. Or just email one of us.
 - Please get in touch with jeremy.skipper@ucl.ac.uk for more annotations and the actual stimuli / movies we used.
 - We are in the process of uploading more derivative timeseries files for those of you who thought our timeseries were overly preprocessed (perhaps removing too much signal). If you can not fine them, again, get intouch with me at jeremy.skipper@ucl.ac.uk.
+
