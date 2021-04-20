@@ -1,0 +1,15 @@
+The Naturalistic Neuroimaging Database (NNDb v1.0) contains datasets for 86 human participants watching one of 10 full-length movies during functional magnetic resonance imaging (fMRI).
+
+The participants were all right-handed, native English speakers, with no history of neurological/psychiatric illnesses, with no hearing impairments, unimpaired or corrected vision, and taking no medications at the time of scan.
+
+Each movie was stopped in ~1-hour intervals or when participants asked for a break, resulting in 2-6 runs of BOLD-fMRI.
+
+A 10min high-resolution defaced T1-weighted anatomical MRI scan (MPRAGE) is also provided.
+
+Data is organized as follows:
+sub-<ID> folders contain raw data for fMRI runs and anatomical scans
+derivatives folder contains the fully preprocessed fMRI data, anatomical mask with white matter and ventricles eroded, anatomical aligned to N27 MNI template
+
+IMPORTANT NOTES:
+1) If you want to use this data with your own preprocessing pipeline and you want to link movie features/events to the movies, please get in touch with one of us about obtaining the movies (if you want to make your own annotations) and how to do 'timing correction' (see the link to the biorxiv manuscript below for details).
+2) Participants 3-6, 10, 11, 24, 28, 29, 31, 39, 41, 72, 83-85 did not have the original IMA files to format into BIDS, so they were manually created (functionals) or copied in from other subjects (anatomicals). These will be updated once access to UCL facilities is restored after the COVID-19 lockdown. 
