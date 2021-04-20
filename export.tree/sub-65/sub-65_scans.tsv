@@ -1,0 +1,6 @@
+filename	acq_time	operator	randstr
+func/sub-65_task-backtothefuture_run-01_bold.nii.gz	2019-12-11T17:31:36	Sarah	b8606344
+func/sub-65_task-backtothefuture_run-02_bold.nii.gz	2019-12-11T17:37:47	Sarah	b9d36aa1
+func/sub-65_task-backtothefuture_run-03_bold.nii.gz	2019-12-11T18:32:59	Sarah	d4dd1ccd
+func/sub-65_task-backtothefuture_run-04_bold.nii.gz	2019-12-11T19:23:36	Sarah	b8f01177
+anat/sub-65_T1w.nii.gz	2019-12-11T19:36:19	Sarah	60255618
