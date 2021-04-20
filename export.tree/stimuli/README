@@ -1,0 +1,2 @@
+Word and face on and offsets are provided in two space- delimited text files. In the word annotation file, columns represent 1) word; 2) word onset in seconds and milliseconds; 3) word offset. In the face annotation file, columns represent 1) face onset in seconds and milliseconds; and 2) duration of face presence in seconds and milliseconds.
+
