@@ -32,3 +32,5 @@
 ### Notes
 - Subjects 3-6, 10, 11, 24, 28, 29, 31, 39, 41, 72, 83-85 did not have the original IMA files to format into BIDS, so they were manually created (functionals) or copied in from other subjects (anatomicals). These will be updated once access to UCL facilities is restored after the COVID-19 lockdown.
 - If you plan to use the raw data with the stimuli / annotations, please be aware that some temporal interpolation is necessary. See our manuscript for details and GitHub for an example script to do this. Or just email one of us. 
+- Please get in touch with jeremy.skipper@ucl.ac.uk for more annotations and the actual stimuli / movies we used.
+- We are in the process of uploading more derivative timeseries files for those of you who thought our timeseries were overly preprocessed (perhaps removing too much signal). If you can not fine them, again, get intouch with me at jeremy.skipper@ucl.ac.uk.

@@ -3,7 +3,7 @@
   "AcquisitionNumber": 1,
   "BandwidthPerPixelPhaseEncode": 19.531,
   "BaseResolution": 64,
-  "CogAtlasID": "TODO",
+  "CogAtlasID": "http://www.cognitiveatlas.org/task/id/tsk_jbg1oF4D9OTkO/",
   "CoilString": "C:HEA;HEP",
   "ConversionSoftware": "dcm2niix",
   "ConversionSoftwareVersion": "v1.0.20190902",

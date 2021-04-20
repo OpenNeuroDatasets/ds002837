@@ -50,6 +50,7 @@
   "SoftwareVersions": "syngo_MR_B17",
   "StationName": "MRC26099",
   "TaskName": "12yearsaslave",
+  "CogAtlasID": "http://www.cognitiveatlas.org/task/id/tsk_jbg1oF4D9OTkO/",
   "global": {
     "const": {
       "AcquisitionMatrix": [64, 0, 0, 64],

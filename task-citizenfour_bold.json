@@ -1,9 +1,9 @@
 {
-  "CogAtlasID": "TODO",
+  "CogAtlasID": "http://www.cognitiveatlas.org/task/id/tsk_jbg1oF4D9OTkO/",
   "ConversionSoftware": "dcm2niix",
   "ConversionSoftwareVersion": "v1.0.20190902",
   "ReconMatrixPE": 64,
   "SliceThickness": 3.2,
   "SpacingBetweenSlices": 3.2,
-  "TaskName": "Citizenfour"
+  "TaskName": "citizenfour"
 }

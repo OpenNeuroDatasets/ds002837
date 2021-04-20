@@ -61,6 +61,7 @@
   "SpacingBetweenSlices": 3.2,
   "StationName": "MRC26099",
   "TaskName": "theshawshankredemption",
+  "CogAtlasID": "http://www.cognitiveatlas.org/task/id/tsk_jbg1oF4D9OTkO/",
   "TotalReadoutTime": 0.0504006,
   "TxRefAmp": 213.878,
   "dcmmeta_affine": [
