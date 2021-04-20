@@ -1,0 +1,4 @@
+filename	acq_time	operator	randstr
+anat/sub-5_T1w.nii.gz	2018-03-17T11:11:11	Sarah	193fded9
+func/sub-5_task-500daysofsummer_run-01_bold.nii.gz	2018-03-17T11:11:11	Sarah	558e7123
+func/sub-5_task-500daysofsummer_run-02_bold.nii.gz	2018-03-17T11:11:11	Sarah	5016bf4e
