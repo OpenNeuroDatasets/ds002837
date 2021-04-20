@@ -14,11 +14,11 @@
         "EPSRC EP/M026965/1"
     ],
     "HowToAcknowledge": "A naturalistic neuroimaging database for understanding the brain using ecological stimuli. Scientific Data.",
-    "License": "TODO: choose a license, e.g. PDDL (http://opendatacommons.org/licenses/pddl/)",
+    "License": "CC0",
     "Name": "Naturalistic Neuroimaging Database",
     "ReferencesAndLinks": [
         "http://naturalistic-neuroimaging-database.org/",
-	"https://github.com/lab-lab/nndb",
-	"https://www.biorxiv.org/content/10.1101/2020.05.22.110817v1"
+        "https://github.com/lab-lab/nndb",
+        "https://www.nature.com/articles/s41597-020-00680-2"
     ]
 }
