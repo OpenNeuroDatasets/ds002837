@@ -1,7 +1,0 @@
-filename	acq_time	operator	randstr
-anat/sub-28_T1w.nii.gz	2019-01-15T11:11:11	Florin	30ef0737
-func/sub-28_task-citizenfour_run-01_bold.nii.gz	2019-01-15T11:11:11	Florin	ba5fb38f
-func/sub-28_task-citizenfour_run-02_bold.nii.gz	2019-01-15T11:11:11	Florin	cc52cae3
-func/sub-28_task-citizenfour_run-03_bold.nii.gz	2019-01-15T11:11:11	Florin	afce5917
-func/sub-28_task-citizenfour_run-04_bold.nii.gz	2019-01-15T11:11:11	Florin	0a4ec737
-func/sub-28_task-citizenfour_run-05_bold.nii.gz	2019-01-15T11:11:11	Florin	8c2ed13c
