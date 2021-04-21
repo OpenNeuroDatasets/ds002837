@@ -1,7 +1,0 @@
-filename	acq_time	operator	randstr
-func/sub-45_task-pulpfiction_run-01_bold.nii.gz	2019-11-09T11:45:23	Florin	34ad66a6
-func/sub-45_task-pulpfiction_run-02_bold.nii.gz	2019-11-09T12:35:17	Florin	481b21db
-func/sub-45_task-pulpfiction_run-03_bold.nii.gz	2019-11-09T13:20:23	Florin	827a65a6
-func/sub-45_task-pulpfiction_run-04_bold.nii.gz	2019-11-09T13:48:57	Florin	3f47096a
-func/sub-45_task-pulpfiction_run-05_bold.nii.gz	2019-11-09T14:29:19	Florin	518259d4
-anat/sub-45_T1w.nii.gz	2019-11-09T14:41:55	Florin	9a883ef4
