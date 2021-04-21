@@ -1,0 +1,6 @@
+filename	acq_time	operator	randstr
+func/sub-23_task-citizenfour_run-01_bold.nii.gz	2018-10-23T17:40:06	Sarah	eeeac06b
+func/sub-23_task-citizenfour_run-02_bold.nii.gz	2018-10-23T18:34:00	Sarah	ee093f4f
+func/sub-23_task-citizenfour_run-03_bold.nii.gz	2018-10-23T18:40:04	Sarah	fc6192d1
+func/sub-23_task-citizenfour_run-04_bold.nii.gz	2018-10-23T19:25:06	Sarah	63d31e68
+anat/sub-23_T1w.nii.gz	2018-10-23T19:47:50	Sarah	e6caaf56
